@@ -1,0 +1,1 @@
+Simple and uncomplicated web tool. It was created for my personal use but I share it with the community. The tool has several practical modules designed to facilitate the manipulation of text, lists and more.

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inad-Tools</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="../img/favicon/icon.png">
+
+    <!-- FONT-AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+
+            <!-- LOGO PROJECT -->
+            <a class="navbar-brand" href="#">
+                <img src="../img/inad-tools-w-colored-fix.png" width="140" draggable="false">
+                <small id="verNum"> v1.0.0</small>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- DARK MODE BUTTOM -->
+            <!-- <div class="theme-toggle">
+                    <label class="switch">
+                        <input disabled type="checkbox" id="darkModeToggle" checked>
+                        <span class="slider">
+                            <i class="fa-solid fa-sun icon sun"></i>
+                            <i class="fa-solid fa-moon icon moon"></i>
+                        </span>
+                    </label>
+                </div> -->
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <!-- TEXT CONVERTER -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="textConverter.html"><i class="fa-solid fa-text-slash"></i> Text
+                            converter</a>
+                    </li>
+
+                    <!-- QR GENERATOR -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="qrgen.html"><i class="fa-solid fa-qrcode"></i> QR Generator</a>
+                    </li>
+
+                    <!-- LIST MANAGEMENT -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="lists.html"><i class="fa-solid fa-list-ul "></i> List
+                            management</a>
+                    </li>
+
+                    <!-- LIST MANAGEMENT -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="findReplace.html"><i class="fa-solid fa-magnifying-glass"></i>
+                            Find and replace</a>
+                    </li>
+
+                    <!-- CHART GENERATOR -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="chartGen.html"><i class="fa-solid fa-chart-pie"></i>
+                            Chart Generator</a>
+                    </li>
+
+                    <!-- BARCODE GENERATOR -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="barcodegen.html"><i class="fa-solid fa-barcode"></i>
+                            Barcode Generator</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <h1>CHART GENERATOR</h1>
+            <span id="chartPreview">PREVIEW</span>
+            <div class="row">
+                <div class="col-9">
+                    <!-- Contenedor del gráfico -->
+                    <div class="chartContainer">
+                        <canvas id="myChart" width="950" height="400"></canvas>
+                    </div>
+                </div>
+
+                <div class="col-2 chartConfigContainer">
+
+                    <h5>Chart Settings</h5>
+                    <hr>
+                    <!-- Tipo de gráfico -->
+                    <label for="chartType">Select the chart type:</label>
+                    <select id="chartType" name="chartType" class="form-select" data-bs-theme="dark">
+                        <option value="bar">Bar (Vertical)</option>
+                        <option value="horizontalBar">Bar (Horizontal)</option>
+                        <option value="line">Line</option>
+                        <option value="pie">Pie</option>
+                        <option value="doughnut">Donut</option>
+                    </select>
+
+                    <!-- Titulo del gráfico -->
+                    <label for="tittleChartInput">Tittle</label>
+                    <input type="text" id="tittleChartInput" class="form-control" data-bs-theme="dark"
+                        oninput="updateTitle()" value="">
+
+                    <!-- Tamaño de la fuente del titulo -->
+                    <label for="titleFontSize" class="form-label">Title font type</label>
+                    <select disabled name="titleFontSize" id="titleFontSize" class="form-select" data-bs-theme="dark">
+                        <option value="15">15px</option>
+                        <option value="20">20px</option>
+                        <option value="25" selected>25px</option>
+                    </select>
+
+
+                    <label hidden for="subTittleChartInput">Subtitle</label>
+                    <input hidden type="text" id="subTittleChartInput" class="form-control" data-bs-theme="dark"
+                        value="">
+
+                    <!-- Etiqueta del gráfico -->
+                    <label for="labelChartValue">Chart Label</label>
+                    <input type="text" id="labelChartValue" class="form-control" data-bs-theme="dark"
+                        onchange="generateChart()" value="">
+
+                    <!-- Tamaño del Valor dentro de gráfico -->
+                    <label for="innerValue">Value inside chart</label>
+                    <select id="innerValue" name="innerValue" class="form-select" data-bs-theme="dark"
+                        onchange="generateChart()">
+                        <option value="0">Don't show</option>
+                        <option value="15">+</option>
+                        <option value="20" selected>++</option>
+                        <option value="25">+++</option>
+                    </select>
+
+                    <!-- color del texto del valor dentro den gráfico -->
+                    <label for="colorInnerValue">Value color</label>
+                    <select name="colorInnerValue" id="colorInnerValue" class="form-control" data-bs-theme="dark"
+                        onchange="generateChart()">
+                        <option value="#000" selected>Black</option>
+                        <option value="#fff">White</option>
+                        <option disabled></option>
+                        <option value="#4bc0c0">Cyan</option>
+                        <option value="#ff6384">Pink</option>
+                        <option value="#36a2eb">Blue</option>
+                        <option value="#ffce56">Yellow</option>
+                        <option value="#4caf50">Green</option>
+                        <option value="#ff9800">Orange</option>
+                    </select>
+                </div>
+
+                <!-- Contenedor de desactivadores  -->
+                <div class="col-1">
+                    <!-- Desactivar titulo -->
+                    <div style="margin-top: 129px; margin-left: -10px;">
+                        <button id="tittleDisable" class="btn btn-dark">Disable</button>
+                    </div>
+
+                    <div hidden>
+                        <button id="subTittleDisable" class="btn btn-dark">Disable</button>
+                    </div>
+
+                    <div style="margin-top: 99px; margin-left: -10px;">
+                        <button id="labelDisable" class="btn btn-dark">Disable</button>
+                    </div>
+                </div>
+
+                <div class="col-12" style="margin: 9px 0px 0px 0px; background-color: rgba(255, 0, 0, 0);">
+                    <button id="downloadChart" class="btn btn-outline-light">
+                        DOWNLOAD CHART
+                        <i class="fa-solid fa-download" style="color: #ffa500;"></i>
+                    </button>
+
+                    <span style="margin: 0px 10px 0px 10px; color: #000000; font-size:1px;">|</span>
+
+                    <button id="randomizeData" class="btn btn-outline-light">
+                        RANDOMIZE VALUES
+                        <i class="fa-solid fa-shuffle" style="color: #ffa500;"></i>
+                    </button>
+
+                    <button id="resetChartConfig" class="btn btn-outline-light" onclick="resetChartConfig()">
+                        RESET CHART SETTINGS
+                        <i class="fa-solid fa-rotate-left" style="color: #ffa500;"></i>
+                    </button>
+
+                    <button id="resetChart" class="btn btn-outline-light" onclick="resetChart()">
+                        RESET CHART <i class="fa-solid fa-arrows-rotate" style="color: #ffa500;"></i>
+                    </button>
+
+                    <script>
+                        function resetChart() {
+                            location.reload(); // Recarga la página actual
+                        }
+                    </script>
+                </div>
+
+
+            </div>
+
+            <br>
+
+            <!-- Formulario para ingresar datos -->
+            <form id="dataForm">
+                <div class="row">
+
+                    <!-- Para el dato A -->
+                    <div class="col-1 switchStyle" style="margin-bottom: 1%;">
+                        <label class="switch switch-small">
+                            <input type="checkbox" id="checkChartA" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="labelA">Name of the dataset A:</label>
+                        <input type="text" id="labelA" class="form-control" data-bs-theme="dark" name="labelA"
+                            value="Data A">
+                    </div>
+
+                    <div class="col-4">
+                        <label for="dataA">Value of data A:</label>
+                        <input type="number" id="dataA" name="dataA" class="form-control" data-bs-theme="dark"
+                            value="10">
+                    </div>
+
+                    <div class="col-2">
+                        <label for="colorA">Data color A:</label>
+                        <select id="colorA" name="colorA" class="form-control" data-bs-theme="dark"
+                            onchange="updateColorInput('colorA', 'colorPickerA')">
+                            <option value="#4bc0c0">Cyan</option>
+                            <option value="#ff6384">Pink</option>
+                            <option value="#36a2eb">Blue</option>
+                            <option value="#ffce56">Yellow</option>
+                            <option value="#4caf50">Green</option>
+                            <option value="#ff9800">Orange</option>
+                        </select>
+                    </div>
+
+                    <div class="col-1">
+                        <label></label>
+                        <input style="margin-top: 3px;" type="range" id="opacityA" name="opacityA" class="form-control"
+                            data-bs-theme="light" min="0.3" max="1" step="0.1" value="0.7">
+                    </div>
+
+                    <!-- Para el dato B -->
+                    <div class="col-1 switchStyle" style="margin-bottom: 1%;">
+                        <label class="switch switch-small">
+                            <input type="checkbox" id="checkChartB" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="labelB">Name of the dataset B:</label>
+                        <input type="text" id="labelB" name="labelB" class="form-control" data-bs-theme="dark"
+                            value="Data B">
+                    </div>
+
+                    <div class="col-4">
+                        <label for="dataB">Value of data B:</label>
+                        <input type="number" id="dataB" name="dataB" class="form-control" data-bs-theme="dark"
+                            value="10">
+                    </div>
+
+                    <div class="col-2">
+                        <label for="colorB">Data color B:</label>
+                        <select id="colorB" name="colorB" class="form-control" data-bs-theme="dark"
+                            onchange="updateColorInput('colorB', 'colorPickerB')">
+                            <option value="#4bc0c0">Cyan</option>
+                            <option value="#ff6384">Pink</option>
+                            <option value="#36a2eb">Blue</option>
+                            <option value="#ffce56">Yellow</option>
+                            <option value="#4caf50">Green</option>
+                            <option value="#ff9800">Orange</option>
+                        </select>
+                    </div>
+
+                    <div class="col-1">
+                        <label></label>
+                        <input style="margin-top: 3px;" type="range" id="opacityB" name="opacityB" class="form-control"
+                            data-bs-theme="light" min="0.3" max="1" step="0.1" value="0.7">
+                    </div>
+
+                    <!-- Para el dato C -->
+                    <div class="col-1 switchStyle" style="margin-bottom: 1%;">
+                        <label class="switch switch-small">
+                            <input type="checkbox" id="checkChartC">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="labelC">Name of the dataset C:</label>
+                        <input type="text" id="labelC" name="labelC" class="form-control" data-bs-theme="dark"
+                            value="Data C">
+                    </div>
+
+                    <div class="col-4">
+                        <label for="dataB">Value of data C:</label>
+                        <input type="number" id="dataC" name="dataC" class="form-control" data-bs-theme="dark"
+                            value="10">
+                    </div>
+
+                    <div class="col-2">
+                        <label for="colorC">Data color C:</label>
+                        <select id="colorC" name="colorC" class="form-control" data-bs-theme="dark"
+                            onchange="updateColorInput('colorB', 'colorPickerB')">
+                            <option value="#4bc0c0">Cyan</option>
+                            <option value="#ff6384">Pink</option>
+                            <option value="#36a2eb">Blue</option>
+                            <option value="#ffce56">Yellow</option>
+                            <option value="#4caf50">Green</option>
+                            <option value="#ff9800">Orange</option>
+                        </select>
+                    </div>
+
+                    <div class="col-1">
+                        <label></label>
+                        <input style="margin-top: 3px;" type="range" id="opacityC" name="opacityC" class="form-control"
+                            data-bs-theme="light" min="0.3" max="1" step="0.1" value="0.7">
+                    </div>
+
+
+                    <!-- Para el dato D -->
+                    <div class="col-1 switchStyle" style="margin-bottom: 1%;">
+                        <label class="switch switch-small">
+                            <input type="checkbox" id="checkChartD">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="labelD">Name of the dataset D:</label>
+                        <input type="text" id="labelD" name="labelD" class="form-control" data-bs-theme="dark"
+                            value="Data D">
+                    </div>
+
+                    <div class="col-4">
+                        <label for="dataB">Value of data D:</label>
+                        <input type="number" id="dataD" name="dataD" class="form-control" data-bs-theme="dark"
+                            value="10">
+                    </div>
+
+                    <div class="col-2">
+                        <label for="colorD">Data color D:</label>
+                        <select id="colorD" name="colorD" class="form-control" data-bs-theme="dark"
+                            onchange="updateColorInput('colorB', 'colorPickerB')">
+                            <option value="#4bc0c0">Cyan</option>
+                            <option value="#ff6384">Pink</option>
+                            <option value="#36a2eb">Blue</option>
+                            <option value="#ffce56">Yellow</option>
+                            <option value="#4caf50">Green</option>
+                            <option value="#ff9800">Orange</option>
+                        </select>
+                    </div>
+
+                    <div class="col-1">
+                        <label></label>
+                        <input style="margin-top: 3px;" type="range" id="opacityD" name="opacityD" class="form-control"
+                            data-bs-theme="light" min="0.3" max="1" step="0.1" value="0.7">
+                    </div>
+
+                    <!-- Para el dato E -->
+                    <div class="col-1 switchStyle" style="margin-bottom: 1%;">
+                        <label class="switch switch-small">
+                            <input type="checkbox" id="checkChartE">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="labelE">Name of the dataset E:</label>
+                        <input type="text" id="labelE" name="labelE" class="form-control" data-bs-theme="dark"
+                            value="Data E">
+                    </div>
+
+                    <div class="col-4">
+                        <label for="dataE">Value of data E:</label>
+                        <input type="number" id="dataE" name="dataE" class="form-control" data-bs-theme="dark"
+                            value="10">
+                    </div>
+
+                    <div class="col-2">
+                        <label for="colorE">Data color E:</label>
+                        <select id="colorE" name="colorE" class="form-control" data-bs-theme="dark"
+                            onchange="updateColorInput('colorB', 'colorPickerB')">
+                            <option value="#4bc0c0">Cyan</option>
+                            <option value="#ff6384">Pink</option>
+                            <option value="#36a2eb">Blue</option>
+                            <option value="#ffce56">Yellow</option>
+                            <option value="#4caf50">Green</option>
+                            <option value="#ff9800">Orange</option>
+                        </select>
+                    </div>
+
+                    <div class="col-1">
+                        <label></label>
+                        <input style="margin-top: 3px;" type="range" id="opacityE" name="opacityE" class="form-control"
+                            data-bs-theme="light" min="0.3" max="1" step="0.1" value="0.7">
+                    </div>
+
+                    <!-- Para el dato F -->
+                    <div class="col-1 switchStyle" style="margin-bottom: 1%;">
+                        <label class="switch switch-small">
+                            <input type="checkbox" id="checkChartF">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="labelF">Name of the dataset F:</label>
+                        <input type="text" id="labelF" name="labelF" class="form-control" data-bs-theme="dark"
+                            value="Data F">
+                    </div>
+
+                    <div class="col-4">
+                        <label for="dataF">Value of data F:</label>
+                        <input type="number" id="dataF" name="dataF" class="form-control" data-bs-theme="dark"
+                            value="10">
+                    </div>
+
+                    <div class="col-2">
+                        <label for="colorF">Data color F:</label>
+                        <select id="colorF" name="colorF" class="form-control" data-bs-theme="dark"
+                            onchange="updateColorInput('colorF', 'colorPickerF')">
+                            <option value="#4bc0c0">Cyan</option>
+                            <option value="#ff6384">Pink</option>
+                            <option value="#36a2eb">Blue</option>
+                            <option value="#ffce56">Yellow</option>
+                            <option value="#4caf50">Green</option>
+                            <option value="#ff9800">Orange</option>
+                        </select>
+                    </div>
+
+                    <div class="col-1">
+                        <label></label>
+                        <input style="margin-top: 3px;" type="range" id="opacityF" name="opacityF" class="form-control"
+                            data-bs-theme="light" min="0.3" max="1" step="0.1" value="0.7">
+                    </div>
+
+                    <!-- Para el dato G -->
+                    <div class="col-1 switchStyle" style="margin-bottom: 1%;">
+                        <label class="switch switch-small">
+                            <input type="checkbox" id="checkChartG">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="labelG">Name of the dataset G:</label>
+                        <input type="text" id="labelG" name="labelG" class="form-control" data-bs-theme="dark"
+                            value="Data G">
+                    </div>
+
+                    <div class="col-4">
+                        <label for="dataG">Value of data G:</label>
+                        <input type="number" id="dataG" name="dataG" class="form-control" data-bs-theme="dark"
+                            value="10">
+                    </div>
+
+                    <div class="col-2">
+                        <label for="colorG">Data color G:</label>
+                        <select id="colorG" name="colorG" class="form-control" data-bs-theme="dark"
+                            onchange="updateColorInput('colorG', 'colorPickerG')">
+                            <option value="#4bc0c0">Cyan</option>
+                            <option value="#ff6384">Pink</option>
+                            <option value="#36a2eb">Blue</option>
+                            <option value="#ffce56">Yellow</option>
+                            <option value="#4caf50">Green</option>
+                            <option value="#ff9800">Orange</option>
+                        </select>
+                    </div>
+
+                    <div class="col-1">
+                        <label></label>
+                        <input style="margin-top: 3px;" type="range" id="opacityG" name="opacityG" class="form-control"
+                            data-bs-theme="light" min="0.3" max="1" step="0.1" value="0.7">
+                    </div>
+
+                    <!-- Para el dato H -->
+                    <div class="col-1 switchStyle" style="margin-bottom: 1%;">
+                        <label class="switch switch-small">
+                            <input type="checkbox" id="checkChartH">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="labelH">Name of the dataset H:</label>
+                        <input type="text" id="labelH" class="form-control" data-bs-theme="dark" name="labelH"
+                            value="Data H">
+                    </div>
+
+                    <div class="col-4">
+                        <label for="dataH">Value of data H:</label>
+                        <input type="number" id="dataH" name="dataH" class="form-control" data-bs-theme="dark"
+                            value="10">
+                    </div>
+
+                    <div class="col-2">
+                        <label for="colorH">Data color H:</label>
+                        <select id="colorH" name="colorH" class="form-control" data-bs-theme="dark"
+                            onchange="updateColorInput('colorA', 'colorPickerA')">
+                            <option value="#4bc0c0">Cyan</option>
+                            <option value="#ff6384">Pink</option>
+                            <option value="#36a2eb">Blue</option>
+                            <option value="#ffce56">Yellow</option>
+                            <option value="#4caf50">Green</option>
+                            <option value="#ff9800">Orange</option>
+                        </select>
+                    </div>
+
+                    <div class="col-1">
+                        <label></label>
+                        <input style="margin-top: 3px;" type="range" id="opacityH" name="opacityH" class="form-control"
+                            data-bs-theme="light" min="0.3" max="1" step="0.1" value="0.7">
+                    </div>
+
+                    <!-- Para el dato I -->
+                    <div class="col-1 switchStyle" style="margin-bottom: 1%;">
+                        <label class="switch switch-small">
+                            <input type="checkbox" id="checkChartI">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="labelI">Name of the dataset I:</label>
+                        <input type="text" id="labelI" class="form-control" data-bs-theme="dark" name="labelI"
+                            value="Data I">
+                    </div>
+
+                    <div class="col-4">
+                        <label for="dataI">Value of data I:</label>
+                        <input type="number" id="dataI" name="dataI" class="form-control" data-bs-theme="dark"
+                            value="10">
+                    </div>
+
+                    <div class="col-2">
+                        <label for="colorI">Data color I:</label>
+                        <select id="colorI" name="colorI" class="form-control" data-bs-theme="dark"
+                            onchange="updateColorInput('colorA', 'colorPickerA')">
+                            <option value="#4bc0c0">Cyan</option>
+                            <option value="#ff6384">Pink</option>
+                            <option value="#36a2eb">Blue</option>
+                            <option value="#ffce56">Yellow</option>
+                            <option value="#4caf50">Green</option>
+                            <option value="#ff9800">Orange</option>
+                        </select>
+                    </div>
+
+                    <div class="col-1">
+                        <label></label>
+                        <input style="margin-top: 3px;" type="range" id="opacityI" name="opacityI" class="form-control"
+                            data-bs-theme="light" min="0.3" max="1" step="0.1" value="0.7">
+                    </div>
+
+                    <!-- Para el dato J -->
+                    <div class="col-1 switchStyle" style="margin-bottom: 1%;">
+                        <label class="switch switch-small">
+                            <input type="checkbox" id="checkChartJ">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="col-4">
+                        <label for="labelJ">Name of the dataset J:</label>
+                        <input type="text" id="labelJ" class="form-control" data-bs-theme="dark" name="labelJ"
+                            value="Data J">
+                    </div>
+
+                    <div class="col-4">
+                        <label for="dataJ">Value of data J:</label>
+                        <input type="number" id="dataJ" name="dataJ" class="form-control" data-bs-theme="dark"
+                            value="10">
+                    </div>
+
+                    <div class="col-2">
+                        <label for="colorJ">Data color J:</label>
+                        <select id="colorJ" name="colorJ" class="form-control" data-bs-theme="dark"
+                            onchange="updateColorInput('colorA', 'colorPickerA')">
+                            <option value="#4bc0c0">Cyan</option>
+                            <option value="#ff6384">Pink</option>
+                            <option value="#36a2eb">Blue</option>
+                            <option value="#ffce56">Yellow</option>
+                            <option value="#4caf50">Green</option>
+                            <option value="#ff9800">Orange</option>
+                        </select>
+                    </div>
+
+                    <div class="col-1">
+                        <label></label>
+                        <input style="margin-top: 3px;" type="range" id="opacityJ" name="opacityJ" class="form-control"
+                            data-bs-theme="light" min="0.3" max="1" step="0.1" value="0.7">
+                    </div>
+                </div>
+            </form>
+    </main>
+
+    <br><br><br>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footerGit">
+            <div class="row">
+                <div id="newVersionContainer" class="col-4 col-left">
+                </div>
+
+                <div class="col-4 col-center">
+                    <a href="https://github.com/im-not-a-d3v" target="_blank">
+                        <i class="fa-brands fa-github">
+                            <small>Gabriel Ureña</small>
+                        </i>
+                    </a>
+                </div>
+
+                <div class="col-4 col-right">
+
+                    <!-- Contenedor para el traductor -->
+                    <div id="google_translate_element"></div>
+                    <script type="text/javascript">
+                        function googleTranslateElementInit() {
+                            new google.translate.TranslateElement({
+                                pageLanguage: 'en',
+                                includedLanguages: 'es',
+                                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                            }, 'google_translate_element');
+                        }
+                    </script>
+
+                    <script type="text/javascript"
+                        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- SCRIPTS -->
+    <!-- MAIN FUNCTION -->
+    <script src="../js/functions/main/chartGen.js"></script>
+    <!-- LIBRARIES -->
+    <!-- SweetAlert2 -->
+    <!-- <script src="../js//libraries/sweetalert2@11.js"></script> -->
+    <!-- Version Check Script -->
+    <!-- <script src="../js/functions/secondary/versionCheck.js"></script> -->
+</body>
+
+</html>

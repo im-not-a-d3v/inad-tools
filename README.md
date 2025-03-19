@@ -1,17 +1,16 @@
+<a href=""><img  src="https://i.ibb.co/chwt5nVs/usa.png
+https://i.ibb.co/hFYrXmRy/spain.png"></a>
+
+###  Welcome to the project 🧩
 
 <br>
-<br>
+
 <p align="center">
 <img  src="https://i.ibb.co/3YhQ5LSV/inad-tools-w-colored-fix.png">
 
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/release-1.0.0-orange.svg?style=flat-square"></a>
   <a href="#"><img src="https://img.shields.io/badge/license-MIT-orange.svg?style=flat-square"></a>
-
-
-![flag!](./assets/img/usa.png)
-
-###  Welcome to the project 🧩
 
 ---
 
@@ -43,11 +42,13 @@ A simple and efficient web tool, designed for personal use but now available to 
 
 <br>
 
----
+
+**Project under [MIT license.](https://es.wikipedia.org/wiki/Licencia_MIT)**
+
 ---
 <br>
 
-![flag!](./assets/img/spain.png)
+<a href=""><img  src="https://i.ibb.co/hFYrXmRy/spain.png"></a>
 
 ###  Bienvenido al proyecto 🧩
 
@@ -56,6 +57,9 @@ A simple and efficient web tool, designed for personal use but now available to 
 <p align="center">
 Una herramienta web simple y eficiente, diseñada para un uso personal pero ahora disponible para toda la comunidad. Incluye módulos prácticos que facilitan la manipulación de textos, listas y otros elementos, optimizando tu flujo de trabajo sin complicaciones. 
 </p>
+
+<p align="center">
+<a href=""><img  src="https://i.ibb.co/qL4fy77h/descargar.png"></a>
 
 ## 🔍 Modules
 - **Convertidor de texto** 
@@ -79,7 +83,6 @@ Una herramienta web simple y eficiente, diseñada para un uso personal pero ahor
 
 <br>
 
----
 **Proyecto bajo [licencia MIT.](https://es.wikipedia.org/wiki/Licencia_MIT)**
 
-# inad-tools
+---

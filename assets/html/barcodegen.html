@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inad-Tools</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="../img/favicon/icon.png">
+
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+
+    <!-- FONT-AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+
+            <!-- LOGO PROJECT -->
+            <a class="navbar-brand" href="#">
+                <img src="../img/inad-tools-w-colored-fix.png" width="140" draggable="false">
+                <small id="verNum"> v1.0.0</small>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- DARK MODE BUTTOM -->
+            <!-- <div class="theme-toggle">
+                <label class="switch">
+                    <input disabled type="checkbox" id="darkModeToggle" checked>
+                    <span class="slider">
+                        <i class="fa-solid fa-sun icon sun"></i>
+                        <i class="fa-solid fa-moon icon moon"></i>
+                    </span>
+                </label>
+            </div> -->
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <!-- TEXT CONVERTER -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="textConverter.html"><i class="fa-solid fa-text-slash"></i> Text
+                            converter</a>
+                    </li>
+
+                    <!-- QR GENERATOR -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="qrgen.html"><i class="fa-solid fa-qrcode"></i> QR Generator</a>
+                    </li>
+
+                    <!-- LIST MANAGEMENT -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="lists.html"><i class="fa-solid fa-list-ul "></i> List
+                            management</a>
+                    </li>
+
+                    <!-- LIST MANAGEMENT -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="findReplace.html"><i class="fa-solid fa-magnifying-glass"></i>
+                            Find and replace</a>
+                    </li>
+
+                    <!-- CHART GENERATOR -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="chartGen.html"><i class="fa-solid fa-chart-pie"></i>
+                            Chart Generator</a>
+                    </li>
+
+                    <!-- BARCODE GENERATOR -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="barcodegen.html"><i class="fa-solid fa-barcode"></i>
+                            Barcode Generator</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main>
+        <div class="container">
+
+            <h1>BARCODE (CODE128) GENERATOR</h1>
+
+            <div class="row">
+                <div class="col-6">
+                    <label for=""></label>
+                    <input type="text" id="barcodeInput" class="form-control text-bg-dark"
+                        placeholder="Enter text or number" oninput="generateBarcode()" value="">
+                </div>
+
+                <div class="col-2">
+                    <label for="sizeSelect">Select size:</label>
+                    <select id="sizeSelect" class="form-control text-bg-dark" onchange="generateBarcode()">
+                        <option value="50x2">Height: 50px, Width: 2px</option>
+                        <option value="50x3">Height: 50px, Width: 3px</option>
+                        <option value="50x4">Height: 50px, Width: 4px</option>
+                        <option value="100x3">Height: 100px, Width: 3px</option>
+                        <option value="150x4">Height: 150px, Width: 4px</option>
+                    </select>
+                </div>
+
+                <div class="col-2">
+                    <label for="colorSelect">Select color:</label>
+                    <select id="colorSelect" class="form-control text-bg-dark" onchange="generateBarcode()">
+                        <option value="#000000">Black</option>
+                        <option value="#FFFFFF">White</option>
+                        <option disabled>Other colors</option>
+                        <option value="#FF0000">Red</option>
+                        <option value="#00FF00">Green</option>
+                        <option value="#0000FF">Blue</option>
+                        <option value="#FFFF00">Yellow</option>
+                    </select>
+                </div>
+
+                <div class="col-2">
+                    <button onclick="downloadBarcode()" class="btn btn-success w-100" style="margin-top: 18px;">
+                        <i class="fa-solid fa-download"></i> Download Barcode
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3" style="margin-top: 10px;">
+                    <input type="checkbox" id="displayValueCheckbox" class="form-check-input text-bg-dark" checked
+                        onchange="generateBarcode()">
+                    <label for="displayValueCheckbox">Show number below barcode</label>
+                </div>
+            </div>
+
+            <!-- Reemplaza el elemento <img> con un <canvas> -->
+            <div id="barcodeContainer">
+                <canvas id="barcode" draggable="false"></canvas>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footerGit">
+            <div class="row">
+                <div id="newVersionContainer" class="col-4 col-left">
+                </div>
+
+                <div class="col-4 col-center">
+                    <a href="https://github.com/im-not-a-d3v" target="_blank">
+                        <i class="fa-brands fa-github">
+                            <small>Gabriel Ureña</small>
+                        </i>
+                    </a>
+                </div>
+
+                <div class="col-4 col-right">
+
+                    <!-- Contenedor para el traductor -->
+                    <div id="google_translate_element"></div>
+                    <script type="text/javascript">
+                        function googleTranslateElementInit() {
+                            new google.translate.TranslateElement({
+                                pageLanguage: 'en',
+                                includedLanguages: 'es',
+                                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                            }, 'google_translate_element');
+                        }
+                    </script>
+
+                    <script type="text/javascript"
+                        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+
+    <!-- MAIN FUNCTION -->
+    <script src="../js/functions/main/barcodegen.js"></script>
+    <!-- Version Check Script -->
+    <!-- <script src="../js/functions/secondary/versionCheck.js"></script> -->
+</body>
+
+</html>

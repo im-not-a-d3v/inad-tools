@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inad-Tools</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="../img/favicon/icon.png">
+
+    <!-- FONT-AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+
+            <!-- LOGO PROJECT -->
+            <a class="navbar-brand" href="#">
+                <img src="../img/inad-tools-w-colored-fix.png" width="140" draggable="false">
+                <small id="verNum"> v1.0.0</small>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- DARK MODE BUTTOM -->
+            <!-- <div class="theme-toggle">
+                <label class="switch">
+                    <input disabled type="checkbox" id="darkModeToggle" checked>
+                    <span class="slider">
+                        <i class="fa-solid fa-sun icon sun"></i>
+                        <i class="fa-solid fa-moon icon moon"></i>
+                    </span>
+                </label>
+            </div> -->
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <!-- TEXT CONVERTER -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="textConverter.html"><i class="fa-solid fa-text-slash"></i> Text
+                            converter</a>
+                    </li>
+
+                    <!-- QR GENERATOR -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="qrgen.html"><i class="fa-solid fa-qrcode"></i> QR Generator</a>
+                    </li>
+
+                    <!-- LIST MANAGEMENT -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="lists.html"><i class="fa-solid fa-list-ul "></i> List
+                            management</a>
+                    </li>
+
+                    <!-- LIST MANAGEMENT -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="findReplace.html"><i class="fa-solid fa-magnifying-glass"></i>
+                            Find and replace</a>
+                    </li>
+
+                    <!-- CHART GENERATOR -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="chartGen.html"><i class="fa-solid fa-chart-pie"></i>
+                            Chart Generator</a>
+                    </li>
+
+                    <!-- BARCODE GENERATOR -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="barcodegen.html"><i class="fa-solid fa-barcode"></i>
+                            Barcode Generator</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main>
+        <div class="container">
+
+            <h1>TEXT CONVERTER</h1>
+
+            <div class="row">
+                <div class="col-sm">
+                    <!-- Div de notificación flotante -->
+                    <div id="copyContent" class="alert alert-info" role="alert"></div>
+                    <span id="cantidadCaracteres">Character Count: * | </span>
+                    <span id="cantiPalabras">Word Count: * | </span>
+                    <span id="cantidadOraciones">Sentence Count: * | </span>
+                    <span id="cantidadLineas">Line Count: * | </span>
+                    <textarea id="inputText" data-bs-theme="dark" class="form-control" rows="20"
+                        placeholder="Your text here!"></textarea>
+
+                    <br>
+
+                    <button id="copiar-btn" class="btn btn-outline-light">Ctrl + C</button>
+                    <button id="lorem-btn" class="btn btn-outline-light">Test!</button>
+                    <button id="limpiar-btn" class="btn btn-outline-danger" style="margin-right: 25px;">Delete</button>
+
+                    <button class="btn btn-outline-secondary" onclick="removeExtraSpaces()">Remove extra spaces</button>
+
+                    <button class="btn btn-outline-secondary" onclick="convertToUppercase()">UPPER CASE</button>
+                    <button class="btn btn-outline-secondary" onclick="convertToLowercase()">low case</button>
+                    <button class="btn btn-outline-secondary" onclick="convertToCapitalized()">Title case</button>
+                    <button class="btn btn-outline-secondary" onclick="capitalizeFirstAndAfterPeriod()">Sentence
+                        case</button>
+                    <button class="btn btn-outline-secondary" onclick="convertToAlternatingCase()">aLtErNaTiNg
+                        cAsE</button>
+
+                    <button id="download-btn" class="btn btn-outline-secondary"><i
+                            class="fa-solid fa-download"></i></button>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footerGit">
+            <div class="row">
+                <div id="newVersionContainer" class="col-4 col-left">
+                </div>
+
+                <div class="col-4 col-center">
+                    <a href="https://github.com/im-not-a-d3v" target="_blank">
+                        <i class="fa-brands fa-github">
+                            <small>Gabriel Ureña</small>
+                        </i>
+                    </a>
+                </div>
+
+                <div class="col-4 col-right">
+
+                    <!-- Contenedor para el traductor -->
+                    <div id="google_translate_element"></div>
+                    <script type="text/javascript">
+                        function googleTranslateElementInit() {
+                            new google.translate.TranslateElement({
+                                pageLanguage: 'en',
+                                includedLanguages: 'es',
+                                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                            }, 'google_translate_element');
+                        }
+                    </script>
+
+                    <script type="text/javascript"
+                        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <!-- MAIN FUNCTION -->
+    <Script src="../js/functions/main/textConverter.js"></Script>
+    <!-- Version Check Script -->
+    <!-- <script src="../js/functions/secondary/versionCheck.js"></script> -->
+</body>
+
+</html>

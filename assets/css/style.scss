@@ -1,0 +1,440 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap");
+@font-face {
+    font-family: "Lovelo-Black";
+    src: url("../fonts/Lovelo-Black.ttf") format("truetype");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    color: white;
+}
+
+body {
+    // background-color: #02031d;
+
+    background-image: url("../img/pattern.png");
+    background-repeat: repeat;
+    background-size: 300px;
+    background-color: #1c1c1c;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: left;
+    color: white;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    padding: 0px 0px 0px 5px;
+    border-left: solid 5px #ffa500;
+    margin-top: 4%;
+    margin-bottom: 3%;
+}
+
+h5 {
+    text-align: left;
+    color: white;
+    padding: 0px 0px 0px 5px;
+    border-left: solid 4px #ffffff;
+    margin-top: 4%;
+    margin-bottom: 3%;
+}
+
+#verNum {
+    font-size: 10px;
+    font-family: "Helvetica Neue", sans-serif;
+    color: #fbb401c2;
+    margin-left: 5px;
+}
+
+#chartPreview {
+    background-color: #ffa500;
+    color: #1c1c1c;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 3px 6px 6px 6px;
+    margin: 0%;
+}
+
+#language_dropdown {
+    select {
+        background-color: #1c1c1c;
+        color: white;
+    }
+
+    option {
+        background-color: #1c1c1c;
+    }
+}
+
+.chartContainer {
+    height: 500px;
+    width: auto;
+    border-radius: 0px 5px 5px 5px;
+    background-color: #ededfa;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+
+    canvas {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    p {
+        color: black;
+        text-align: start;
+        font-size: 11px;
+        margin-left: 20px;
+        margin-top: -30px;
+        margin-bottom: -20px;
+    }
+}
+
+.chartConfigContainer {
+    select,
+    input {
+        margin-bottom: 8px;
+    }
+}
+
+.footerGit {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    margin-top: 36vh;
+    text-align: center;
+    padding: 10px;
+    background-color: #1c1c1c;
+    border-top: solid 1px rgba(255, 255, 255, 0.048);
+
+    .col-left {
+        // background-color: rgba(255, 0, 0, 0.1);
+        text-align: left;
+        font-weight: lighter;
+        color: #7e7e7e;
+    }
+    .col-center {
+        background-color: rgba(0, 128, 0, 0);
+    }
+    .col-right {
+        text-align: end;
+        background-color: rgba(0, 0, 255, 0);
+    }
+
+    a {
+        text-decoration: none;
+        small {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 11px;
+            text-transform: up;
+            transition: 0.4s;
+        }
+        small:hover {
+            color: #ffa500;
+        }
+
+        i {
+            color: rgba(255, 255, 255, 0.2);
+            transition: 0.4s;
+        }
+
+        i:hover {
+            color: #ffa500;
+        }
+    }
+}
+
+#copyContent {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 300px;
+    display: none;
+    /* Ocultarlo inicialmente */
+}
+
+#occurrencesContainer {
+    #occurrencesNumContainer {
+        height: 30px;
+        border-radius: 5px;
+        background-color: #ffcd7d63;
+        color: #000000 !important;
+        text-align: center;
+        align-content: center;
+
+        #occurrencesMatchesNum,
+        #occurrencesReplaceNum {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+}
+
+#barcodeContainer {
+    width: 100%;
+    border: solid 3px #f39c12;
+    border-radius: 5px;
+    margin-top: 2%;
+    background-color: #808080;
+    margin-left: auto;
+    margin-right: auto;
+
+    #barcode {
+        height: 120px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+#navFrame {
+    border: none;
+    width: 100%;
+}
+
+.btn-settings {
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0px 10px 0px 10px;
+}
+
+#settings-container {
+    align-items: end;
+    align-content: end;
+}
+
+#qrcode {
+    margin-top: 20px;
+}
+
+.swal2-popup {
+    padding: 1rem !important;
+}
+
+.swal2-html-container {
+    margin: 0 !important;
+}
+
+#qrcode-alert {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+// Nav
+
+/* Contenedor del switch */
+.theme-toggle {
+    position: fixed;
+    margin-left: 48%;
+}
+
+/* Estilos del switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Slider estilo del interruptor */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f39c12; /* Color naranja para modo claro */
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+/* Iconos dentro del switch */
+.icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    transition: 0.4s;
+    opacity: 0;
+}
+
+.sun {
+    left: 7px;
+    color: #f39c12;
+
+    opacity: 1;
+}
+
+.moon {
+    right: 8px;
+    color: #1c1c1c;
+    // color: rgb(152, 0, 253);
+    opacity: 0;
+}
+
+/* Cambiar estado cuando está activado (modo oscuro) */
+input:checked + .slider {
+    background-color: #333; /* Color oscuro para modo noche */
+}
+
+input:checked + .slider:before {
+    transform: translateX(36px);
+}
+
+input:checked + .slider .sun {
+    opacity: 0; /* Ocultar sol en modo oscuro */
+}
+
+input:checked + .slider .moon {
+    opacity: 1; /* Mostrar luna en modo oscuro */
+}
+
+/* Redondear el slider */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.switchStyle {
+    label {
+        margin-top: 25%;
+        margin-left: 35%;
+    }
+}
+
+/* Estilos básicos para el switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px; /* Separación entre switches */
+}
+
+/* Ocultar el checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Slider básico */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #ccc;
+    transition: 0.4s;
+}
+
+/* Círculo interior */
+.slider:before {
+    position: absolute;
+    content: "";
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+/* Cambiar color del slider cuando está activado */
+input:checked + .slider {
+    background-color: #21a0ff;
+}
+
+/* Mover el círculo cuando está activado */
+input:checked + .slider:before {
+    transform: translateX(18px); /* Ajuste para el pequeño */
+}
+
+/* Tamaño Pequeño */
+.switch-small {
+    width: 40px;
+    height: 20px;
+}
+.switch-small .slider {
+    border-radius: 20px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.switch-small .slider:before {
+    width: 14px;
+    height: 14px;
+    left: 3px;
+    bottom: 3px;
+}
+input:checked + .switch-small .slider:before {
+    transform: translateX(20px); /* Ajuste para mover el círculo al final */
+}
+
+/* Tamaño Normal */
+.switch-normal {
+    width: 60px;
+    height: 34px;
+}
+.switch-normal .slider {
+    border-radius: 34px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.switch-normal .slider:before {
+    width: 26px;
+    height: 26px;
+    left: 4px;
+    bottom: 4px;
+}
+input:checked + .switch-normal .slider:before {
+    transform: translateX(26px);
+}
+
+/* Tamaño Grande */
+.switch-large {
+    width: 80px;
+    height: 44px;
+}
+.switch-large .slider {
+    border-radius: 44px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.switch-large .slider:before {
+    width: 36px;
+    height: 36px;
+    left: 4px;
+    bottom: 4px;
+}
+input:checked + .switch-large .slider:before {
+    transform: translateX(36px);
+}
